@@ -2,8 +2,9 @@
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import UserProfile, Like # UserProfile 및 Like 모델이 정의된 파일 임포트
+from .models import UserProfile, Like  # UserProfile 및 Like 모델이 정의된 파일 임포트
 from chat.models import ChatRoom
+
 
 # 1. UserProfile Serializer
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -13,12 +14,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ['user', 'nickname', 'age', 'gender', 'bio', 'interests','profile_picture']
+        # 🔑 location 필드 추가
+        fields = ['user', 'nickname', 'age', 'gender', 'bio', 'interests', 'location', 'profile_picture']
+
 
 # 2. Like Serializer (좋아요 생성/조회)
 class LikeSerializer(serializers.ModelSerializer):
     liker = serializers.ReadOnlyField(source='liker.id')
-    receiver = serializers.IntegerField() # 좋아요를 받는 사람의 ID를 입력받음
+    receiver = serializers.IntegerField()  # 좋아요를 받는 사람의 ID를 입력받음
 
     class Meta:
         model = Like
@@ -42,15 +45,15 @@ class LikeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("이미 좋아요를 누르셨습니다.")
 
         # 유효성 검사 후 User 객체로 변환하여 뷰로 전달
-        data['receiver'] = receiver 
+        data['receiver'] = receiver
         return data
-    
+
     def create(self, validated_data):
         # 1. 좋아요 객체 생성
         like = Like.objects.create(**validated_data)
         
-        liker = validated_data['liker'] # 좋아요를 누른 사람 (나)
-        receiver = validated_data['receiver'] # 좋아요를 받은 사람 (상대방)
+        liker = validated_data['liker']      # 좋아요를 누른 사람 (나)
+        receiver = validated_data['receiver']  # 좋아요를 받은 사람 (상대방)
         
         # 2. 매칭 확인: 상대방이 나에게 좋아요를 눌렀는지 확인
         is_match = Like.objects.filter(liker=receiver, receiver=liker).exists()
@@ -69,14 +72,15 @@ class LikeSerializer(serializers.ModelSerializer):
                     user1=user_a,
                     user2=user_b,
                     # 방 이름은 user ID 조합으로 생성 (예: chat_1_5)
-                    name=f'chat_{user_a.id}_{user_b.id}' 
+                    name=f'chat_{user_a.id}_{user_b.id}'
                 )
                 print(f"매칭 성사! 새로운 채팅방이 생성되었습니다: chat_{user_a.id}_{user_b.id}")
             else:
                 print("채팅방이 이미 존재합니다.")
                 
         return like
-    
+
+
 # 3. User Registration Serializer (회원가입)
 class UserRegistrationSerializer(serializers.ModelSerializer):
     # 비밀번호 필드는 쓰기 전용으로 설정
@@ -85,7 +89,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
-        read_only_fields = ('id',) 
+        read_only_fields = ('id',)
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -93,7 +97,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         # Django의 기본 함수로 안전하게 사용자 생성
         user = User.objects.create_user(
             username=validated_data['username'],
-            email=validated_data.get('email', ''), 
+            email=validated_data.get('email', ''),
             password=password
         )
         

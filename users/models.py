@@ -1,7 +1,7 @@
-# DatingApp/users/models.py (프로필 사진 필드 추가 완료)
+# DatingApp/users/models.py (프로필 사진 + 거주지역 필드 추가)
 
 from django.db import models
-from django.contrib.auth.models import User # Django의 기본 사용자 모델 임포트
+from django.contrib.auth.models import User  # Django의 기본 사용자 모델 임포트
 
 # 1. 사용자 프로필 모델
 class UserProfile(models.Model):
@@ -16,7 +16,14 @@ class UserProfile(models.Model):
     # 예시 필드: 관심사 (CSV 형태로 저장)
     interests = models.CharField(max_length=255, blank=True, verbose_name='관심사')
 
-    # 🔑 [추가] 프로필 사진 필드 추가
+    # 🔑 [추가] 거주지역 필드
+    location = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name='거주지역'
+    )
+
+    # 🔑 [추가] 프로필 사진 필드
     profile_picture = models.ImageField(
         upload_to='profile_pics/',    # media/profile_pics/ 경로에 파일 저장
         blank=True,                   # 필수가 아님
@@ -27,12 +34,23 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.nickname
 
+
 # 2. 좋아요 (Like) 모델
 class Like(models.Model):
     # 좋아요를 누른 사용자 (누가)
-    liker = models.ForeignKey(User, related_name='given_likes', on_delete=models.CASCADE, verbose_name='좋아요 누른 사람')
+    liker = models.ForeignKey(
+        User,
+        related_name='given_likes',
+        on_delete=models.CASCADE,
+        verbose_name='좋아요 누른 사람'
+    )
     # 좋아요를 받은 사용자 (누구에게)
-    receiver = models.ForeignKey(User, related_name='received_likes', on_delete=models.CASCADE, verbose_name='좋아요 받은 사람')
+    receiver = models.ForeignKey(
+        User,
+        related_name='received_likes',
+        on_delete=models.CASCADE,
+        verbose_name='좋아요 받은 사람'
+    )
     
     created_at = models.DateTimeField(auto_now_add=True)
     

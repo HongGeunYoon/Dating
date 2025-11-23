@@ -7,7 +7,7 @@ from .models import UserProfile, Like # Like 모델도 함께 등록하면 좋�
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     # 관리자 페이지에서 보여줄 필드 목록
-    list_display = ('user', 'nickname', 'age', 'gender', 'profile_picture')
+    list_display = ('user', 'nickname', 'age', 'gender', 'profile_picture','location')
     # 검색 가능 필드
     search_fields = ('nickname', 'user__username')
     # 필터링 가능 필드
