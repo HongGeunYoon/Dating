@@ -1,50 +1,48 @@
-# DatingApp/users/models.py (프로필 사진 + 거주지역 필드 추가)
-
 from django.db import models
-from django.contrib.auth.models import User  # Django의 기본 사용자 모델 임포트
+from django.contrib.auth.models import User
 
 # 1. 사용자 프로필 모델
 class UserProfile(models.Model):
-    # Django의 기본 User 모델과 1:1로 연결하여 확장
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
-    nickname = models.CharField(max_length=30, unique=True, verbose_name='닉네임')
-    age = models.IntegerField(verbose_name='나이')
-    gender = models.CharField(max_length=1, choices=[('M', '남성'), ('F', '여성')], verbose_name='성별')
-    bio = models.TextField(blank=True, verbose_name='자기소개')
+    # [수정] 가입 시점에는 입력을 안 하므로 null=True, blank=True 추가
+    # 주의: nickname은 unique=True이므로, 값이 없을 때 DB에서 충돌하지 않으려면 null=True가 필수입니다.
+    nickname = models.CharField(max_length=30, unique=True, null=True, blank=True, verbose_name='닉네임')
     
-    # 예시 필드: 관심사 (CSV 형태로 저장)
+    # [수정] 나이와 성별도 나중에 입력하므로 빈 값 허용
+    age = models.IntegerField(null=True, blank=True, verbose_name='나이')
+    gender = models.CharField(max_length=1, choices=[('M', '남성'), ('F', '여성')], null=True, blank=True, verbose_name='성별')
+    
+    bio = models.TextField(blank=True, verbose_name='자기소개')
     interests = models.CharField(max_length=255, blank=True, verbose_name='관심사')
 
-    # 🔑 [추가] 거주지역 필드
     location = models.CharField(
         max_length=100,
         blank=True,
         verbose_name='거주지역'
     )
 
-    # 🔑 [추가] 프로필 사진 필드
+    # 프로필 사진 (회원가입 때 입력받음)
     profile_picture = models.ImageField(
-        upload_to='profile_pics/',    # media/profile_pics/ 경로에 파일 저장
-        blank=True,                   # 필수가 아님
-        null=True,                    # 데이터베이스에 Null 허용
+        upload_to='profile_pics/',
+        blank=True,
+        null=True,
         verbose_name='프로필 사진'
     )
 
     def __str__(self):
-        return self.nickname
+        # 닉네임이 없으면 유저네임으로 표시
+        return self.nickname if self.nickname else self.user.username
 
 
-# 2. 좋아요 (Like) 모델
+# 2. 좋아요 (Like) 모델 (기존 동일)
 class Like(models.Model):
-    # 좋아요를 누른 사용자 (누가)
     liker = models.ForeignKey(
         User,
         related_name='given_likes',
         on_delete=models.CASCADE,
         verbose_name='좋아요 누른 사람'
     )
-    # 좋아요를 받은 사용자 (누구에게)
     receiver = models.ForeignKey(
         User,
         related_name='received_likes',
@@ -54,7 +52,6 @@ class Like(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
     
-    # 동일한 사람이 동일한 사람에게 중복 좋아요를 누를 수 없도록 설정
     class Meta:
         unique_together = ('liker', 'receiver')
 

@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=C:\Users\showg\OneDrive\Desktop\25-2\soga\DatingApp\venv"
+set "VIRTUAL_ENV=C:\Users\showg\OneDrive\Desktop\sodating\Dating\venv"
 
 if not defined PROMPT set PROMPT=$P$G
 
