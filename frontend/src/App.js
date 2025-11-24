@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import ProfileForm from './components/ProfileForm';
@@ -210,26 +211,26 @@ function App() {
     } else if (currentView === 'chat_list') {
         const currentUserId = getCurrentUserId();
         mainContent = (
-            <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-                <h1 style={{ textAlign: 'center' }}>내 채팅 목록 💬</h1>
+            <div className="chat-list-container">
+                <h1 className="chat-list-header">내 채팅 목록 💬</h1>
                 {chatRooms.length > 0 ? chatRooms.map(room => (
                     <div key={room.id} onClick={() => handleMatchSuccess(room.name)} 
-                        style={{ padding: '15px', borderBottom: '1px solid #eee', cursor: 'pointer', backgroundColor: '#fff', marginTop: '10px' }}>
+                        className="chat-item">
                         <strong>{(room.user1.toString() === currentUserId.toString()) ? room.user2_nickname : room.user1_nickname}</strong> 님과의 대화
                     </div>
-                )) : <p style={{ textAlign: 'center', marginTop: '30px' }}>채팅방이 없습니다.</p>}
+                )) : <p className="empty-message">채팅방이 없습니다.</p>}
             </div>
         );
     } else if (currentView === 'stats') {
         mainContent = <Stats />;
     } else { 
         mainContent = (
-            <div style={{ padding: '20px', textAlign: 'center' }}>
-                <h1>오늘의 매칭 대상 ✨</h1>
-                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div>
+                <h1 className="match-header">오늘의 매칭 대상 ✨</h1>
+                <div className="match-container">
                     {matchProfiles.length > 0 ? matchProfiles.map(profile => (
                         <MatchCard key={profile.user} profile={profile} onLikeSuccess={handleLikeSuccess} onMatchSuccess={handleMatchSuccess}/>
-                    )) : <p style={{ marginTop: '20px' }}>매칭 가능한 프로필이 없습니다.</p>}
+                    )) : <p className="empty-message">매칭 가능한 프로필이 없습니다.</p>}
                 </div>
             </div>
         );

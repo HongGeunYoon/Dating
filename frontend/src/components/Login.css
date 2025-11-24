@@ -1,0 +1,117 @@
+/* Romantic Dating Login */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 25%, #ffd6eb 50%, #ffcce6 75%, #ffc2e0 100%);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 400px !important;
+  border: 4px solid #ff8fb3 !important;
+  border-radius: 25px !important;
+  background: linear-gradient(135deg, #ffffff 0%, #ffe5f1 100%);
+  box-shadow: 0 15px 50px rgba(255, 94, 157, 0.5) !important;
+  padding: 50px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card::before {
+  content: '💕';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 100px;
+  opacity: 0.1;
+}
+
+.login-card h2 {
+  font-family: 'Cookie', cursive;
+  font-size: 56px;
+  text-align: center;
+  margin-bottom: 35px;
+  background: linear-gradient(135deg, #ff5e9d 0%, #ff3d7f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(255, 94, 157, 0.2);
+}
+
+.login-card .form-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ff3d7f;
+  margin-bottom: 8px;
+}
+
+.login-card .form-control {
+  border: 2px solid #ffb3d9;
+  border-radius: 15px;
+  padding: 12px 16px;
+  font-size: 15px;
+  background-color: #ffffff;
+  transition: all 0.3s;
+}
+
+.login-card .form-control:focus {
+  border-color: #ff5e9d;
+  box-shadow: 0 0 15px rgba(255, 94, 157, 0.3);
+  background-color: #ffffff;
+  transform: scale(1.02);
+}
+
+.login-card .btn-primary {
+  background: linear-gradient(135deg, #ff5e9d 0%, #ff3d7f 100%);
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px;
+  margin-top: 15px;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 20px rgba(255, 94, 157, 0.4);
+}
+
+.login-card .btn-primary:hover {
+  background: linear-gradient(135deg, #ff3d7f 0%, #d81b60 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 94, 157, 0.6);
+}
+
+.login-card .btn-primary:disabled {
+  background: linear-gradient(135deg, #ffb3d9 0%, #ffc2e0 100%);
+  cursor: not-allowed;
+}
+
+.login-card .text-center {
+  font-size: 15px;
+  color: #4a0e2e;
+  font-weight: 600;
+}
+
+.login-card .text-center button {
+  color: #ff3d7f;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.login-card .text-center button:hover {
+  color: #d81b60;
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+.login-card .alert {
+  font-size: 14px;
+  border-radius: 15px;
+  border: 2px solid #ff8fb3;
+  background-color: #ffe5f1;
+  color: #d81b60;
+  font-weight: 600;
+}

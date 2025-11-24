@@ -1,20 +1,46 @@
+/* Romantic Dating App Design */
+:root {
+  --date-primary: #ff5e9d;
+  --date-secondary: #ff8fb3;
+  --date-accent: #ff3d7f;
+  --date-light-pink: #ffe5f1;
+  --date-border: #ffb3d9;
+  --date-background: linear-gradient(135deg, #ffeef8 0%, #ffc2e0 100%);
+  --date-white: #ffffff;
+  --date-text: #4a0e2e;
+  --date-text-light: #8e4a6f;
+  --date-heart: #ff1744;
+}
+
 .App {
   text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+  background: var(--date-background);
+  min-height: 100vh;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.App-logo:hover {
+  transform: scale(1.1);
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 20s ease-in-out;
   }
 }
 
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, #ff5e9d 0%, #ff3d7f 50%, #d81b60 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,10 +48,94 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 8px rgba(216, 27, 96, 0.5);
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ff5e9d;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.App-link:hover {
+  border-bottom: 2px solid #ff5e9d;
+}
+
+/* 매칭 리스트 헤더 */
+.match-header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--date-text);
+  padding: 25px;
+  background: linear-gradient(135deg, #ff5e9d 0%, #ff8fb3 100%);
+  color: white;
+  border: none;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(255, 61, 127, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 94, 157, 0.3);
+}
+
+/* 매칭 카드 컨테이너 */
+.match-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 채팅 리스트 */
+.chat-list-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: var(--date-white);
+  border: 3px solid var(--date-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(255, 94, 157, 0.3);
+  overflow: hidden;
+}
+
+.chat-list-header {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 20px;
+  background: linear-gradient(135deg, #ff5e9d 0%, #ff8fb3 100%);
+  color: white;
+  border: none;
+  text-shadow: 1px 1px 3px rgba(255, 61, 127, 0.3);
+}
+
+.chat-item {
+  padding: 18px;
+  border-bottom: 2px solid var(--date-light-pink);
+  cursor: pointer;
+  background-color: var(--date-white);
+  transition: all 0.3s;
+}
+
+.chat-item:hover {
+  background: linear-gradient(90deg, #ffe5f1 0%, #ffffff 100%);
+  transform: translateX(5px);
+  border-left: 4px solid var(--date-primary);
+}
+
+.chat-item:last-child {
+  border-bottom: none;
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--date-text-light);
+  padding: 50px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 @keyframes App-logo-spin {

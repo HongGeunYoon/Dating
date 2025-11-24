@@ -1,0 +1,62 @@
+/* Romantic Dating App NavBar */
+.instagram-navbar {
+  background: linear-gradient(90deg, #ff5e9d 0%, #ff8fb3 50%, #ff5e9d 100%) !important;
+  border-bottom: 3px solid #ff3d7f;
+  padding: 12px 0;
+  box-shadow: 0 4px 15px rgba(255, 94, 157, 0.4) !important;
+}
+
+.instagram-navbar .navbar-brand {
+  font-family: 'Cookie', cursive;
+  font-size: 32px;
+  color: #ffffff !important;
+  font-weight: bold;
+  transition: all 0.3s;
+  text-shadow: 2px 2px 4px rgba(255, 61, 127, 0.5);
+}
+
+.instagram-navbar .navbar-brand:hover {
+  transform: scale(1.1);
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
+}
+
+.instagram-navbar .nav-link {
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: all 0.3s;
+  text-shadow: 1px 1px 3px rgba(255, 61, 127, 0.3);
+}
+
+.instagram-navbar .nav-link:hover {
+  color: #ffe5f1 !important;
+  transform: translateY(-2px);
+  text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.6);
+}
+
+.instagram-navbar .nav-link.active {
+  color: #fff !important;
+  font-weight: 900;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.instagram-navbar .btn-outline-danger {
+  border: 2px solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 8px 20px;
+  border-radius: 25px;
+  transition: all 0.3s;
+}
+
+.instagram-navbar .btn-outline-danger:hover {
+  background-color: #ffffff;
+  color: #ff3d7f;
+  border-color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+}
