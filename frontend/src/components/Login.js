@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Card, Form, Button, Alert } from 'react-bootstrap'; // 🔑 Bootstrap 컴포넌트 임포트
+import './Login.css';
 
 // 🔑 onRegisterClick 프롭을 받도록 정의합니다.
 function Login({ onLoginSuccess, onRegisterClick }) {
@@ -30,8 +31,8 @@ function Login({ onLoginSuccess, onRegisterClick }) {
   };
 
   return (
-  <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-     <Card style={{ width: '22rem', padding: '20px' }}>
+  <Container className="login-container">
+     <Card className="login-card">
       <Card.Body>
         <h2 className="text-center mb-4">로그인</h2>
 

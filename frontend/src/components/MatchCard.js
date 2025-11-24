@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import axios from 'axios';
 import { Card, Button } from 'react-bootstrap'; 
+import './MatchCard.css';
 
 function MatchCard({ profile, onLikeSuccess, onMatchSuccess }) {
     const token = localStorage.getItem('accessToken');
@@ -93,7 +94,7 @@ function MatchCard({ profile, onLikeSuccess, onMatchSuccess }) {
     };
 
     return (
-        <Card style={{ width: '18rem', margin: '15px', boxShadow: '0 4px 8px rgba(0,0,0,0.12)' }}>
+        <Card className="match-card">
             
             {/* 🚀 수정된 부분: getImageUrl 함수 사용 */}
             <Card.Img 

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import './NavBar.css';
 
 // props: onNavigate(뷰 전환), onLogout(로그아웃), currentView(현재 뷰 상태)
 function NavBar({ onNavigate, onLogout, currentView }) {
@@ -18,7 +19,7 @@ function NavBar({ onNavigate, onLogout, currentView }) {
     }
 
     return (
-        <Navbar bg="light" expand="lg" sticky="top" className="shadow-sm">
+        <Navbar bg="light" expand="lg" sticky="top" className="instagram-navbar">
             <Container>
                 <Navbar.Brand 
                     href="#" 
